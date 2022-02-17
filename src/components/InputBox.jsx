@@ -3,14 +3,11 @@ import styles from "./InputBox.module.css";
 
 function InputBox(props) {
 	const [input, setInput] = useState("");
-	const { createActivity, saveActivities, clearActivities } = props;
+	const { createTask } = props;
 
 	const inputRef = useRef();
-
 	useEffect(() => inputRef.current.focus(), []);
 
-	// return <input type="text" ref={inputRef} />;
-	// Handle events
 	function handleChange(e) {
 		setInput(e.target.value);
 	}
@@ -22,7 +19,7 @@ function InputBox(props) {
 	}
 
 	function submitActivity() {
-		createActivity(input);
+		createTask(input);
 		setInput("");
 	}
 
@@ -43,14 +40,6 @@ function InputBox(props) {
 					disabled={!input}
 				>
 					Add task
-				</button>
-			</div>
-			<div className={styles["button-container"]}>
-				<button className={styles.save} onClick={saveActivities}>
-					Save
-				</button>
-				<button className={styles.clear} onClick={clearActivities}>
-					Clear
 				</button>
 			</div>
 		</section>

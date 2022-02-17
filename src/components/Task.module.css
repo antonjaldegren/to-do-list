@@ -37,7 +37,7 @@
 	height: 1.3rem;
 	transform: scale(0);
 	background-color: grey;
-	transition: 100ms transform ease-in-out;
+	transition: 200ms transform ease-in-out;
 	clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
 }
 
@@ -50,6 +50,9 @@ input[type="checkbox"]:checked::before {
 	margin: 0;
 	text-transform: uppercase;
 	overflow: hidden;
+	text-decoration: line-through;
+	text-decoration-color: transparent;
+	transition: 200ms all ease-in-out;
 }
 
 .remove-button {
@@ -71,43 +74,8 @@ input[type="checkbox"]:checked::before {
 	background-color: rgb(246, 69, 69);
 }
 
-.month {
-	text-align: center;
-	font-weight: lighter;
-	letter-spacing: 0.3rem;
-	text-transform: uppercase;
-	margin-bottom: 0.8em;
-}
-
-.button-container {
-	background-color: white;
-	padding: 1em;
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(3.7rem, 1fr));
-	grid-auto-rows: 2.8rem;
-	gap: 0.5em;
-}
-
-.day-button {
-	font-size: 1rem;
-	color: grey;
-	background: none;
-	border: 1px solid rgb(218, 218, 218);
-	border-radius: 10%;
-}
-
 .completed {
-	color: white;
-	background-color: rgb(92, 125, 223);
-	border: none;
-}
-
-.completed:hover {
-	background: rgb(56, 100, 230);
-}
-
-@media (min-width: 600px) {
-	.title {
-		font-size: 2rem;
-	}
+	text-decoration-color: grey;
+	color: grey;
+	transition: 200ms all ease-in-out;
 }

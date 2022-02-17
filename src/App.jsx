@@ -1,75 +1,48 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import styles from "./App.module.css";
 
 import MainTitle from "./components/MainTitle";
 import InputBox from "./components/InputBox";
-import ActivityList from "./components/ActivityList";
+import TaskList from "./components/TaskList";
 
 function App() {
-	const [activities, setActivities] = useState(() => getActivities());
+	const [tasks, setTasks] = useState([]);
 
-	useEffect(() => console.log("App mounted"), []);
-
-	// Handle activities:
-	function createActivity(title) {
-		const newActivity = {
+	function createTask(title) {
+		const newTask = {
 			title: title,
 			id: uuidv4(),
-			daysCompleted: [],
+			isCompleted: false,
 		};
 
-		setActivities((prevActivities) => [...prevActivities, newActivity]);
+		setTasks((prevtasks) => [...prevtasks, newTask]);
 	}
 
-	function toggleDay(id, day) {
-		setActivities(
-			[...activities].map((activity) => {
-				if (activity.id !== id) return activity;
+	function toggleTask(id, isChecked) {
+		setTasks(
+			[...tasks].map((task) => {
+				if (task.id !== id) return task;
 
-				const index = activity.daysCompleted.indexOf(day);
-				index > -1
-					? activity.daysCompleted.splice(index, 1)
-					: activity.daysCompleted.push(day);
+				task.isCompleted = isChecked;
 
-				return activity;
+				return task;
 			})
 		);
 	}
 
-	function removeActivity(id) {
-		return setActivities(
-			activities.filter((activity) => activity.id !== id)
-		);
-	}
-
-	// Handle local storage:
-	function getActivities() {
-		return JSON.parse(window.localStorage.getItem("myActivities")) || [];
-	}
-
-	function saveActivities() {
-		const data = JSON.stringify(activities);
-		window.localStorage.setItem("myActivities", data);
-	}
-
-	function clearActivities() {
-		window.localStorage.removeItem("myActivities");
-		setActivities([]);
+	function removeTask(id) {
+		return setTasks(tasks.filter((task) => task.id !== id));
 	}
 
 	return (
 		<div className={styles.app}>
 			<MainTitle text="TO-DO LIST" />
-			<InputBox
-				createActivity={createActivity}
-				saveActivities={saveActivities}
-				clearActivities={clearActivities}
-			/>
-			<ActivityList
-				activities={activities}
-				toggleDay={toggleDay}
-				removeActivity={removeActivity}
+			<InputBox createTask={createTask} />
+			<TaskList
+				tasks={tasks}
+				toggleTask={toggleTask}
+				removeTask={removeTask}
 			/>
 		</div>
 	);

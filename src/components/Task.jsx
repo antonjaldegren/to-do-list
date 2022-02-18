@@ -14,14 +14,12 @@ function Task(props) {
 				<input
 					className={styles.check}
 					type="checkbox"
-					onChange={(e) => toggleTask(id, e.target.checked)}
+					onChange={() => toggleTask(id)}
 				/>
 				<h2
-					className={
-						isCompleted
-							? `${styles.title} ${styles.completed}`
-							: styles.title
-					}
+					className={`${styles.title} ${
+						isCompleted ? styles.completed : null
+					}`}
 				>
 					{title}
 				</h2>

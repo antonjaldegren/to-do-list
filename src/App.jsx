@@ -10,23 +10,22 @@ function App() {
 	const [tasks, setTasks] = useState([]);
 
 	function createTask(title) {
-		const newTask = {
-			title: title,
-			id: uuidv4(),
-			isCompleted: false,
-		};
-
-		setTasks((prevtasks) => [...prevtasks, newTask]);
+		setTasks((prevtasks) => [
+			...prevtasks,
+			{
+				title: title,
+				id: uuidv4(),
+				isCompleted: false,
+			},
+		]);
 	}
 
-	function toggleTask(id, isChecked) {
+	function toggleTask(id) {
 		setTasks(
 			[...tasks].map((task) => {
-				if (task.id !== id) return task;
-
-				task.isCompleted = isChecked;
-
-				return task;
+				return task.id !== id
+					? task
+					: { ...task, isCompleted: !task.isCompleted };
 			})
 		);
 	}
@@ -39,11 +38,13 @@ function App() {
 		<div className={styles.app}>
 			<MainTitle text="TO-DO LIST" />
 			<InputBox createTask={createTask} />
-			<TaskList
-				tasks={tasks}
-				toggleTask={toggleTask}
-				removeTask={removeTask}
-			/>
+			{tasks.length > 0 ? (
+				<TaskList
+					tasks={tasks}
+					toggleTask={toggleTask}
+					removeTask={removeTask}
+				/>
+			) : null}
 		</div>
 	);
 }

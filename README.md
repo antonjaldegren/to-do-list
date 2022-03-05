@@ -1,3 +1,8 @@
+# to-do-list
+
+Deployed at: https://antonjaldegren-todolist.netlify.app/ \
+Simple to-do-list with features to add/remove task from the list and mark the task as "done".
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
